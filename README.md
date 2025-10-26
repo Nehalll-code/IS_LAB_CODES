@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 IS_Lab_Code_Helper
 ===================
 
@@ -51,135 +52,186 @@ Repository layout (high level)
     - `pkse_cipher.py`, `pkse_demo.py` — Public-key Searchable Encryption (demonstration using deterministic RSA tokens)
 
 - Key management and access control
-    - `key_management.py` — simple keystore, rotation, revocation utilities
-    - `access_control.py` — RBAC / ABAC / time-based policies demo
+    IS_Lab_Code_Helper
+    ===================
 
-- Misc / Demos / Networking
-    - `multipart_client.py`, `multipart_server.py`, `hash_client.py`, `hash_server.py`, `sig_client.py`, `sig_server.py`
+    This repository contains educational implementations and templates for common cryptographic primitives and lab exercises used in the IS lab course. The files are intentionally simple and well‑commented so you can study, adapt, and run them during your end‑semester lab exam.
 
-How to run the common demos
----------------------------
-Open a PowerShell terminal in the repository root (for example `C:\Users\Nehal\Desktop\Is_lab_code_helper`).
+    Prerequisites
+    -------------
+    - Python 3.8+ (3.10 or 3.11 recommended)
+    - Recommended packages (install in your active environment):
 
-1) Quick sanity: compute custom hash
+    ```powershell
+    python -m pip install --upgrade pip
+    pip install pycryptodome
+    ```
 
-```powershell
-python .\hash_util.py "hello world"
-```
+    If you prefer a requirements file, create one with:
 
-2) Hash server / client (single-shot)
+    ```powershell
+    pip freeze > requirements.txt
+    ```
 
-Terminal A (server):
-```powershell
-python .\hash_server.py
-```
+    Security note
+    -------------
+    These implementations are for teaching and lab use only. They intentionally use simplified algorithms (raw RSA, small parameters, no padding) to make the math and flow clear. Do not use these scripts for production or to protect real secrets.
 
-Terminal B (client):
-```powershell
-python .\hash_client.py "Message to check"
-```
+    Repository layout (high level)
+    -----------------------------
+    - Basic classical ciphers (useful for Labs 1–3)
+        - `additive_cipher.py`, `multiplicative_cipher.py`, `affine_cipher.py`, `vigenere_cipher.py`, `autokey_cipher.py`, `playfair_cipher.py`, `hill_cipher.py`, `transposition_cipher.py`
 
-3) Multipart integrity demo (split message into parts)
+    - Symmetric block ciphers and utilities
+        - `aes_cipher.py`, `des_cipher.py`, `triple_des_cipher.py`, `symmetric_ciphers.py`
 
-Terminal A (server):
-```powershell
-python .\multipart_server.py
-```
+    - Hashing and integrity (Lab 5)
+        - `hash_util.py` — custom 32-bit hash (start 5381, multiply by 33 + mixing)
+        - `hash_server.py` / `hash_client.py` — single-shot integrity server/client demo
+        - `multipart_server.py` / `multipart_client.py` — split/reassemble integrity demo
+        - `hash_performance.py` — compare MD5, SHA-1, SHA-256, and the custom hash (timings + collisions)
 
-Terminal B (client):
-```powershell
-python .\multipart_client.py "A long message to split and verify" --parts 5
-```
+    - Asymmetric crypto & signatures (Labs 4 & 6)
+        - `rsa_cipher.py`, `rsa_homomorphic.py` (RSA & multiplicative homomorphism)
+        - `elgamal_cipher.py`, `elgamal_homomorphic.py` (ElGamal & multiplicative homomorphism)
+        - `rabin_cipher.py`
+        - `digital_signature_utils.py`, `sig_server.py`, `sig_client.py` — signature helpers and client/server demo (RSA, ElGamal, Schnorr)
 
-4) Hash performance experiment
+    - Public-Key / Partially Homomorphic (Lab 7)
+        - `paillier_cipher.py` — Paillier implementation (additive homomorphism)
 
-```powershell
-python .\hash_performance.py
-```
+    - Searchable Encryption (Lab 8)
+        - `sse_cipher.py`, `sse_demo.py` — Symmetric Searchable Encryption (HMAC tokenization + AES payload encryption)
+        - `pkse_cipher.py`, `pkse_demo.py` — Public-key Searchable Encryption (demonstration using deterministic RSA tokens)
 
-5) Run Paillier demo (additive homomorphism)
+    - Key management and access control
+        - `key_management.py` — simple keystore, rotation, revocation utilities
+        - `access_control.py` — RBAC / ABAC / time-based policies demo
 
-```powershell
-python .\paillier_cipher.py
-```
+    - Misc / Demos / Networking
+        - `multipart_client.py`, `multipart_server.py`, `hash_client.py`, `hash_server.py`, `sig_client.py`, `sig_server.py`
 
-6) RSA homomorphic demo (multiplicative)
+    How to run the common demos
+    ---------------------------
+    Open a PowerShell terminal in the repository root (for example `C:\Users\Nehal\Desktop\Is_lab_code_helper`).
 
-```powershell
-python .\rsa_homomorphic.py
-```
+    1) Quick sanity: compute custom hash
 
-7) ElGamal homomorphic demo
+    ```powershell
+    python .\hash_util.py "hello world"
+    ```
 
-```powershell
-python .\elgamal_homomorphic.py
-```
+    2) Hash server / client (single-shot)
 
-8) Signature server/client (Lab 6 work-flow)
+    Terminal A (server):
+    ```powershell
+    python .\hash_server.py
+    ```
 
-Start signature server:
-```powershell
-python .\sig_server.py
-```
+    Terminal B (client):
+    ```powershell
+    python .\hash_client.py "Message to check"
+    ```
 
-Use the client to request a sign/verify operation (example: RSA sign):
-```powershell
-python .\sig_client.py --op sign --alg RSA --message "Hello" --key '{"n":"<n>","d":"<d>"}'
-```
+    3) Multipart integrity demo (split message into parts)
 
-9) Searchable encryption demos (Lab 8)
+    Terminal A (server):
+    ```powershell
+    python .\multipart_server.py
+    ```
 
-```powershell
-python .\sse_demo.py
-python .\pkse_demo.py
-```
+    Terminal B (client):
+    ```powershell
+    python .\multipart_client.py "A long message to split and verify" --parts 5
+    ```
 
-Notes and troubleshooting
--------------------------
-- Windows firewall: if servers fail to accept connections, allow Python through Windows Defender Firewall or run on localhost and use `127.0.0.1`.
-- Large key generation can be slow on low-end machines. For demos you can lower key sizes (e.g., 512 bits) but do not treat them as secure.
-- Some demos use PyCryptodome. If an import fails, install the package: `pip install pycryptodome`.
+    4) Hash performance experiment
 
-Testing and quick validation
-----------------------------
-Run a short import check to ensure modules load:
+    ```powershell
+    python .\hash_performance.py
+    ```
 
-```powershell
-python - <<'PY'
-import importlib
-modules = ['hash_util','paillier_cipher','rsa_homomorphic','elgamal_cipher','sse_cipher','pkse_cipher']
-for m in modules:
-        try:
-                importlib.import_module(m)
-                print(m, 'OK')
-        except Exception as e:
-                print(m, 'ERROR ->', e)
-PY
-```
+    5) Run Paillier demo (additive homomorphism)
 
-Extending the repository
-------------------------
-- Add more algorithms (e.g., ECC / OPRF-based SE) as separate modules.
-- Integrate `key_management.py` with the demo servers to allow persistent key storage.
-- Replace educational primitives with PyCryptodome-verified schemes and proper padding (PKCS#1 or RSA-OAEP) for stronger demos.
+    ```powershell
+    python .\paillier_cipher.py
+    ```
 
-References & further reading
---------------------------
-- Menezes, van Oorschot and Vanstone — Handbook of Applied Cryptography
-- Boneh & Waters — Searchable Encryption literature
-- PyCryptodome documentation: https://pycryptodome.readthedocs.io
+    6) RSA homomorphic demo (multiplicative)
 
-License & attribution
----------------------
-This code is provided for educational use. You may copy and adapt it for coursework and lab demonstrations. If you publish or distribute derivative work, please include attribution.
+    ```powershell
+    python .\rsa_homomorphic.py
+    ```
 
-Questions or help
------------------
-If you want, I can:
-- Run the demos and capture sample outputs for your lab report.
-- Wire key generation into the `key_management.py` keystore.
-- Add unit tests for a subset of modules.
+    7) ElGamal homomorphic demo
 
-Tell me which follow-up you want and I will continue.
+    ```powershell
+    python .\elgamal_homomorphic.py
+    ```
 
+    8) Signature server/client (Lab 6 work-flow)
 
+    Start signature server:
+    ```powershell
+    python .\sig_server.py
+    ```
+
+    Use the client to request a sign/verify operation (example: RSA sign):
+    ```powershell
+    python .\sig_client.py --op sign --alg RSA --message "Hello" --key '{"n":"<n>","d":"<d>"}'
+    ```
+
+    9) Searchable encryption demos (Lab 8)
+
+    ```powershell
+    python .\sse_demo.py
+    python .\pkse_demo.py
+    ```
+
+    Notes and troubleshooting
+    -------------------------
+    - Windows firewall: if servers fail to accept connections, allow Python through Windows Defender Firewall or run on localhost and use `127.0.0.1`.
+    - Large key generation can be slow on low-end machines. For demos you can lower key sizes (e.g., 512 bits) but do not treat them as secure.
+    - Some demos use PyCryptodome. If an import fails, install the package: `pip install pycryptodome`.
+
+    Testing and quick validation
+    ----------------------------
+    Run a short import check to ensure modules load:
+
+    ```powershell
+    python - <<'PY'
+    import importlib
+    modules = ['hash_util','paillier_cipher','rsa_homomorphic','elgamal_cipher','sse_cipher','pkse_cipher']
+    for m in modules:
+            try:
+                    importlib.import_module(m)
+                    print(m, 'OK')
+            except Exception as e:
+                    print(m, 'ERROR ->', e)
+    PY
+    ```
+
+    Extending the repository
+    ------------------------
+    - Add more algorithms (e.g., ECC / OPRF-based SE) as separate modules.
+    - Integrate `key_management.py` with the demo servers to allow persistent key storage.
+    - Replace educational primitives with PyCryptodome-verified schemes and proper padding (PKCS#1 or RSA-OAEP) for stronger demos.
+
+    References & further reading
+    --------------------------
+    - Menezes, van Oorschot and Vanstone — Handbook of Applied Cryptography
+    - Boneh & Waters — Searchable Encryption literature
+    - PyCryptodome documentation: https://pycryptodome.readthedocs.io
+
+    License & attribution
+    ---------------------
+    This code is provided for educational use. You may copy and adapt it for coursework and lab demonstrations. If you publish or distribute derivative work, please include attribution.
+
+    Questions or help
+    -----------------
+    If you want, I can:
+    - Run the demos and capture sample outputs for your lab report.
+    - Wire key generation into the `key_management.py` keystore.
+    - Add unit tests for a subset of modules.
+
+    Tell me which follow-up you want and I will continue.
