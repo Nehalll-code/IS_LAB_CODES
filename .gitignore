@@ -1,0 +1,56 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Logs and runtime files
+*.log
+*.pid
+
+# Key files and secrets (do NOT commit private keys)
+keystore.json
+key_management.log
+access_control.log
+*.pem
+*.key
+*.crt
+*.der
+*.p12
+.env
+secrets*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Large binary files (use Git LFS if needed)
+*.bin
+*.sqlite
+
+# Ignore compiled C extensions
+*.so
+
+# Node / other
+node_modules/
+
+# Temporary files
+*.tmp
+*~
