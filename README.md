@@ -58,7 +58,7 @@ Repository layout (high level)
 
     How to run the common demos
     ---------------------------
-    Open a PowerShell terminal in the repository root (for example `C:\Users\Nehal\Desktop\Is_lab_code_helper`).
+    Open a PowerShell terminal in the repository root (for example `C:\Users\@user\@folder\Is_lab_code_helper`).
 
     1) Quick sanity: compute custom hash
 
