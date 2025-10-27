@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-IS_Lab_Code_Helper
+IS_Lab 
 ===================
 
 This repository contains educational implementations and templates for common cryptographic primitives and lab exercises used in the IS lab course. The files are intentionally simple and well‑commented so you can study, adapt, and run them during your end‑semester lab exam.
